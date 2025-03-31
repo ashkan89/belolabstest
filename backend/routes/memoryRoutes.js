@@ -1,8 +1,11 @@
 const express = require('express');
-const { saveGameData } = require('../controllers/memoryController');
 const router = express.Router();
+const memoryController = require('../controllers/memoryController');
 
 // Route to save game data
-router.post('/save', saveGameData);
+router.post('/save', memoryController.saveGameData);
+
+// Route to fetch game records
+router.get('/records', memoryController.fetchGameRecords);
 
 module.exports = router;

@@ -165,6 +165,16 @@ const Play = () => {
     setModalPlayIsOpen(true);
   };
 
+  const HistoryopenModal = () => {
+    playClickSound();
+    const userID = localStorage.getItem("userID");
+    if (!userID) {
+      alert("UserID is missing. Please log in again.");
+      return;
+    }
+    navigate("/game-history");
+  };
+
   const PlaycloseModal = () => {
     playClickSound();
     setModalPlayIsOpen(false);
@@ -224,6 +234,13 @@ const Play = () => {
           onMouseEnter={playHoverSound}
         >
           Play
+        </button>
+        <button
+          className={`game-button ${isCalmMode ? "calm-button" : ""}`}
+          onClick={HistoryopenModal}
+          onMouseEnter={playHoverSound}
+        >
+          Game History
         </button>
         <button
           className={`game-button ${isCalmMode ? "calm-button" : ""}`}

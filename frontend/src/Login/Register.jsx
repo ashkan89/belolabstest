@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './Register.module.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
-  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/users/register', formData);
-      setMessage(response.data.message);
+      toast.success(response.data.message, {
+        autoClose: 3000,
+      });
     } catch (error) {
-      setMessage(error.response?.data.message || 'Error registering');
+      toast.error(error.response?.data.message || 'Error registering', {
+        autoClose: 3000,
+      });
     }
+  };
+
+  const handleLoginRedirect = () => {
+    navigate('/login');
   };
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h2 className={styles.title}>Register</h2>
         <input
           type="text"
           placeholder="Username"
@@ -34,11 +45,17 @@ const Register = () => {
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>
-          Register
-        </button>
-        {message && <p className={styles.message}>{message}</p>}
+        <div className={styles.buttonContainer}>
+          <button type="submit" className={`${styles.button} ${styles.registerButton}`}>
+            Register
+          </button>
+          <button type="button" onClick={handleLoginRedirect} className={`${styles.button} ${styles.registerButton}`}>
+            Back
+          </button>
+        </div>
       </form>
+      {/* Toast Container */}
+      <ToastContainer position="top-right" />
     </div>
   );
 };
