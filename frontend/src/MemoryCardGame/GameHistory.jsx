@@ -143,7 +143,7 @@ const GameHistory = () => {
             <HistoryCard key={index}>
               <Typography>{`Difficulty: ${item.difficulty}`}</Typography>
               <Typography>{`Completed: ${item.completed ? "Yes" : "No"}`}</Typography>
-              <Typography>{`Failed: ${item.failed ? "Yes" : "No"}`}</Typography>
+              <Typography>{`Failed: ${item.failed}`}</Typography>
               <Typography>{`Time Taken: ${item.timeTaken}s`}</Typography>
             </HistoryCard>
           ))
