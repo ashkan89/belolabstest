@@ -17,7 +17,7 @@
     "@mui/material": "^6.4.1",
     "@react-spring/web": "^9.7.5",
     "axios": "^1.7.9",
-    "fine-packages": "^1.0.0",
+    "fine-packages": "^0.0.1-security",
     "framer-motion": "^12.0.5",
     "lucide-react": "^0.474.0",
     "react": "^18.3.1",
